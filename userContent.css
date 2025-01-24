@@ -1,0 +1,405 @@
+@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+    
+    /* --------- Background --------- */
+    
+    body::before {
+        content: "";
+        z-index: -1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-image: url(img/deer-digital-art-4k-wz-1920x1080-128947371.jpg);
+        background-position: center;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    /* --------- How the most visited sites get handled as --------- */
+    
+    .ds-top-sites {  /* Move the most visited sites onto the right side of the screen */
+        position: absolute;
+        right: 0;
+        
+        /* Centralise the sites into the center of the screen. */
+        top: 50%;
+        transform: translateY(-50%);
+        
+        inset-inline-end: var(--space-xsmall);  /* Makes the most visited sites bar vertically inline with the settings button */
+    }
+    
+    .top-sites-list {
+        display: grid;  /* Makes the most visited sites bar vertical */
+        justify-items: center;  /* Makes the each item in the grid centralised */
+        
+        background-color: rgba(36, 26, 40, 0.5);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.2);
+        
+        /* Makes the edges nicely spaced out and curved */
+        padding: 5px 0 5px 0 !important;
+        border-radius: 15px;
+    }
+    
+    .top-site-outer {
+        width: fit-content !important;
+        margin-block-end: 2px !important;  /* Separates each grid item by 2px (from the bottom) */
+    }
+    
+    .top-site-outer .top-site-inner {
+        /* Centralises the content inside */
+        display: flex;
+        justify-content: center;
+        
+        width: fit-content !importnat;
+    }
+    
+    .top-site-outer .top-site-inner > a {  /* Removes any padding from any anchor tags in the top-site-outer and inner classes */
+        padding: 0px !important;  /* Need '!important' because the activity stream css file goes after this file */
+    }
+    
+    /* ---- Fixes a firefox issue, where if you click on another context menu button whilst one is active, the new button click wouldn't register so the tile background and button itself will fade away leaving the menu by itself (not clean). This fixes it. ---- */
+    
+    .top-site-outer:has(.top-site-inner div .context-menu) .context-menu-button {
+        opacity: 1 !important;
+    }
+    
+    .top-site-outer:has(.top-site-inner div .context-menu) .tile {
+        background-color: rgb(51, 51, 51) !important;
+    }
+    
+    /* -------------------------------- */
+    
+    .top-site-button .tile {
+        /* Ensures the tile is set to be the size of the wrapper */
+        margin: 0 !important;
+        width: fit-content !important;
+        height: fit-content !important;
+        
+        background-color: transparent !important;  /* Remove any background */
+        box-shadow: none !important;  /* Remove any shadows that were applied by default */
+    }
+    
+    .top-site-icon {  /* Forces all icons to have the same dimensions- whether they're 'rich icons' or 'default icons'. */
+        width: 32px !important;
+        height: 32px !important;
+        position: relative !important;  /* Enables centralising by icon-wrapper (enabled by default) */
+        background-color: transparent !important;
+    }
+    
+    .title {
+        position: absolute !important;
+        padding: 3px !important;
+        border-radius: 5px;  /* Round the corners off */
+        
+        /* Ensures the pin tag be at the top right corner */
+        top: 2px;
+        right: 5px;
+        
+        /* Centralises the ::after background image */
+        display: flex;
+        justify-content: center;
+        
+        /* Adds a nice shadow and the pin background to the element */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.2);
+        background-color: rgb(119, 15, 45);
+                
+        opacity: 0;  /* Hides the pin tag by default */
+    }
+    
+    .top-site-button .title::after {  /* Creates the pin tag background */
+        content: "";
+        
+        width: 11px;
+        height: 11px;
+        
+        background-image: url(img/pin-icon-sign.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    
+    .top-site-button .pinned {  /* When the title/site is pinned, make it visible */
+        opacity: 1;
+    }
+    
+    .top-site-outer .top-site-inner .top-site-button .title span {
+        display: none !important;  /* Removes any title information of a recently visited site */
+    }
+    
+    /* --------- How the context menu for options of the most visited sites get handled --------- */
+    .context-menu-button {
+        background-image: url(img/menu-arrow.png) !important;
+        background-color: transparent !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+        left: -16px;
+        width: 14px !important;
+    }
+    
+    .context-menu-button:hover {
+        background-image: url(img/menu-arrow-hover.png) !important;
+    }
+    
+    /* When a list item has the context menu open, then rotate the arrow button */
+    .top-site-inner div:has(.context-menu) .context-menu-button {
+        rotate: 0 1 0 180deg !important;
+    }
+    
+    .context-menu {
+        left: -70px !important;
+        top: 0 !important;
+        transform: translateY(-33%);
+        
+        background-color: transparent !important;
+        box-shadow: none !important;
+        
+        /* Only has the size of the items inside of it */
+        width: fit-content !important;
+        margin: 0 !important;
+    }
+    
+    .context-menu-list .separator {
+        margin: 0 !important;
+        border-bottom: none !important;
+    }
+    
+    .context-menu-item {
+        position: relative;  /* So I can change their position's relative to the ul */
+        width: fit-content !important;
+    }
+    
+    .context-menu-item button {
+        width: fit-content !important;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.2);
+        
+        border-radius: 10px;
+        padding: 4px !important;
+        background-color: rgba(36, 26, 40, 0.5) !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .context-menu-item button:hover {
+        background: var(--newtab-element-hover-color) !important;
+    }
+    
+    .context-menu-item button span {
+        font-size: 0;  /* Hides any descriptions of the item */
+        width: 15px !important;  /* Sets the dimensions for the images */
+        height: 15px !important;
+        background-size: contain;  /* Contains the element with the image */
+        background-repeat: no-repeat;
+        background-position: center;  /* Makes item be in the centre of the bubble */
+    }
+    
+    /* --------- Popup hints for each icon ----------- */
+    .context-menu-item::after {  /* The basic layout for a pop up */
+        background-color: rgb(43, 42, 51);
+        border: 1px solid white;
+        color: white;
+        position: absolute;
+        padding: 2px 3px 1px 3px;
+        border-radius: 5px;
+        top: -115%;
+        transform: translate(-75%);
+        white-space: nowrap;
+        
+        opacity: 0;
+        transition: 0s opacity;
+        
+        pointer-events: none;  /* So popups don't interfere with other options (if they overlap with any) */
+    }
+    
+    .context-menu-item:hover::after {  /* Makes the pop up show up after a delay, similar to the title attribute. */
+        opacity: 1;
+        transition-delay: 0.75s;
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-pin'])::after {
+        content: "Pin";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-unpin'])::after {
+        content: "Unpin";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-edit-topsites'])::after {
+        content: "Edit";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-open-new-window'])::after {
+        content: "Open New Window";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-open-new-private-window'])::after {
+        content: "Open Private Window";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-dismiss'])::after {
+        content: "Remove site";
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-delete-history'])::after {
+        content: "Permanently remove";
+    }
+    
+    /* --------- How each individual icon is animated --------- */
+    /* ---- (Un)Pin Icon ---- */
+    @keyframes pinIconAnimation {
+        from {
+            /* The translation that makes the pin icon start by the arrow arrow */
+            transform: translate(43px, 67px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(15px, 0) scale(1);
+        }
+    }
+    
+    /* Use the attribute selector to individually select each option and have their own unique image tied to them. */
+    .context-menu-item button [data-l10n-id='newtab-menu-pin'] {
+        background-image: url(img/pin-icon-sign.png);
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-unpin'] {
+        background-image: url(img/unpin-icon-sign.png);
+    }
+    
+    /* Applies the animation to the menu item that has the pin button inside it */
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-pin']), .context-menu-item:has(button [data-l10n-id='newtab-menu-unpin']) {
+        animation: pinIconAnimation 0.35s ease-out forwards;      
+    }
+    
+    /* ---- Edit Icon ---- */
+    @keyframes editIconAnimation {
+        from {
+            transform: translate(43px, 38px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(-12px, 0) scale(1);
+        }
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-edit-topsites'] {
+        background-image: url(img/pen-icon.png);
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-edit-topsites']) {
+        animation: editIconAnimation 0.35s ease-out forwards;
+    }
+    
+    /* ---- New Window Icon ---- */
+    @keyframes newWindowIconAnimation {
+        from {
+            transform: translate(43px, 11px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(-30px, 0) scale(1);
+        }
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-open-new-window'] {
+        background-image: url(img/new-tab-icon.png);
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-open-new-window']) {
+        animation: newWindowIconAnimation 0.35s ease-out forwards;
+    }
+    
+    /* ---- New Private Window Icon ---- */
+    @keyframes newPrivWindowIconAnimation {
+        from {
+            transform: translate(43px, -18px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(-30px, 0) scale(1);
+        }
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-open-new-private-window'] {
+        background-image: url(img/inactive-indicator-private-browsing.png);
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-open-new-private-window']) {
+        animation: newPrivWindowIconAnimation 0.35s ease-out forwards;
+    }
+    
+    /* ---- Dismiss Icon ---- */
+    @keyframes dismissIconAnimation {
+        from {
+            transform: translate(43px, -46px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(-12px, 0) scale(1);
+        }
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-dismiss'] {
+        background-image: url(img/inactive-trash-can-icon.png);
+    }
+    
+    .context-menu-item button:hover [data-l10n-id='newtab-menu-dismiss'] {
+        background-image: url(img/trash-can-icon.png);
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-dismiss']) {
+        animation: dismissIconAnimation 0.35s ease-out forwards;
+    }
+    
+    /* ---- Delete History Icon ---- */
+    @keyframes deleteIconAnimation {
+        from {
+            transform: translate(43px, -74px) scale(0.4);
+        }
+        
+        to {
+            transform: translate(15px, 0) scale(1);
+        }
+    }
+    
+    .context-menu-item button [data-l10n-id='newtab-menu-delete-history'] {
+        background-image: url(img/inactive-fire-icon.png);
+    }
+    
+    .context-menu-item button:hover [data-l10n-id='newtab-menu-delete-history'] {
+        background-image: url(img/fire-icon.png);
+    }
+    
+    .context-menu-item:has(button [data-l10n-id='newtab-menu-delete-history']) {
+        animation: deleteIconAnimation 0.35s ease-out forwards;
+    }
+    
+    /* --------- How the main logo gets handled --------- */
+    
+    .search-wrapper {  /* Repositioning the logo and word-mark */
+        padding: 20px !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    
+    /* This is the search bar in firefox, it doesn't produce any dropdowns itself and just redirects to address bar so 
+       this is one way of removing it. */
+    .search-inner-wrapper {
+        display: none !important;
+    }
+    
+    .logo-and-wordmark {
+        margin: 0 !important;
+    }
+    
+    .logo {
+        background-image: url(img/Firefox_logo,_2017.png) !important;
+        background-size: contain !important;
+    }
+    
+    .wordmark {
+        background-image: url(img/Firefox%20Wordmark.png) !important;
+    }
+    
+    /* ------------------------------------------------------------ */
+
+}
