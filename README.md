@@ -5,7 +5,7 @@ The firefox customisations I rock.
 
 
 ## Setup
-1. Enter and submit 'about:support' in the address bar (without the speech marks). View the section: "*Application Basics*". <br>Depending on the OS you are using you want to find:<ul><li>"*Profile Directory*" for linux</li><li>"*Profile Folder*" for windows or mac</li></ul><br>Then click the "*Open Directory/Open Folder/Show in Finder*" button which will take you to the firefox profile for your user.
+1. Enter and submit 'about:support' in the address bar (without the speech marks). View the section: "*Application Basics*". <br>Depending on the OS you are using you want to find:<ul><li>"*Root Directory*" for linux (use the directory with the .default-release suffix)</li><li>"*Profile Folder*" for windows or mac</li></ul><br>Then click the "*Open Directory/Open Folder/Show in Finder*" button which will take you to the firefox profile for your user.
 ![image](https://github.com/user-attachments/assets/2ca4bbcc-4b75-4d82-b2c1-36ecd11e7295)
 
 2. You'll see a bunch of folders and files. However, you want to find a folder called: "*chrome*", if you can't that's perfectly fine, just create a folder called "*chrome*".
