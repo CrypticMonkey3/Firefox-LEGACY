@@ -15,6 +15,23 @@
         height: 100vh;
     }
     
+    /* --------- Settings button --------- */
+    .personalizeButtonWrapper {
+        top: 1.6em !important;  /* Ensures the settings icon stays 1.6em from the top */
+        
+        /* Removes anything that makes the wrapper a different size to the actual button */
+        inset-block-end: revert !important;
+        
+        padding-right: 25px !important;  /* Same amount of padding on the right as the .collapsible-section class */
+    }
+    
+    @media (height >= 700px) {
+        .personalizeButtonWrapper {  /* Aligns the settings button with the list of most visited sites */
+            inset-inline-end: unset !important;
+            right: var(--space-xsmall) !important;
+        }
+    }
+    
     /* --------- How the most visited sites get handled as --------- */
     
     .ds-top-sites {  /* Move the most visited sites onto the right side of the screen */
@@ -29,7 +46,7 @@
     }
     
     .top-sites-list {
-        display: grid;  /* Makes the most visited sites bar vertical */
+        display: grid !important;  /* Makes the most visited sites bar vertical */
         justify-items: center;  /* Makes the each item in the grid centralised */
         
         background-color: rgba(36, 26, 40, 0.5);
@@ -38,6 +55,10 @@
         /* Makes the edges nicely spaced out and curved */
         padding: 5px 0 5px 0 !important;
         border-radius: 15px;
+        
+        /* Make the list vertical with a small gap between them. */
+        grid-template-columns: auto !important;
+        row-gap: var(--space-xsmall) !important;
     }
     
     .top-site-outer {
